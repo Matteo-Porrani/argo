@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+body {
+  background: #f8f9fa;
+  color: #212529;
+  width: 80%;
+  margin: 0 auto;
+}
+
+section {
+  background: hsl(210, 20%, 92%);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+form * {
+  font-size: 1.5rem;
+  font-family: monospace;
+}
+
+.crew__wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.card {
+  border: 1px solid #212529;
+  width: 22%;
+
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.avat_img {
+  max-width: 60px;
+}

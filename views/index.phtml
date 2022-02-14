@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="public/css/base.css">
+
+  <title>Argonautes 3.0</title>
+</head>
+
+<body>
+
+  <!-- MK -- HEADER -->
+  <header>
+
+    <h1>Argonautes 3.0</h1>
+
+  </header>
+
+  <!-- MK -- MAIN -->
+  <main>
+
+    <!-- T*T -- INTRO -->
+    <section id="intro">
+      <p>Lorem ipsum dolor sit amet consectetur 24, adipisicing corrupti architecto ipsam illum ea voluptatem ut quis provident.
+        Nostrum earum, rem exercitationem recusandae repellendus est iure tenetur alias esse illo vero praesentium qui.</p>
+    </section>
+
+    <!-- T*T -- MEMBER -->
+    <section id="member">
+
+
+      <form action="index.php" method="POST">
+
+        <p>
+          <label for="f_icon">Avatar</label>
+          <select name="f_icon" id="f_icon">
+            <option value="ava_1.png">1</option>
+            <option value="ava_2.png">2</option>
+            <option value="ava_3.png">3</option>
+            <option value="ava_4.png">4</option>
+            <option value="ava_5.png">5</option>
+          </select>
+        </p>
+
+        <p>
+          <label for="f_name">Nom</label>
+          <input type="text" name="f_name" id="f_name">
+        </p>
+
+        <p>
+          <label for="f_sign">Signes particuliers</label>
+          <input type="text" name="f_sign" id="f_sign">
+        </p>
+
+        <p>
+          <label for="f_navg">Navigation</label>
+          <input type="number" name="f_navg" id="f_navg" min="0" max="6" value="3">
+        </p>
+
+        <p>
+          <label for="f_comb">Combat</label>
+          <input type="number" name="f_comb" id="f_comb" min="0" max="6" value="3">
+        </p>
+
+        <button type="submit">Enregistrer</button>
+
+
+      </form>
+
+
+
+    </section>
+
+    <!-- T*T -- CREW -->
+    <section id="crew">
+
+      <div class="crew__wrapper">
+
+        <?php foreach ($memberList as $m) { ?>
+          <div class="card">
+
+            <div class="card__icon">
+              <img class="avat_img" src="public/icons/<?= $m['memIcon'] ?>" alt="">
+            </div>
+
+            <div class="card__text">
+              <h3><?= $m['memId'] ?></h3>
+              <h3><?= $m['memName'] ?></h3>
+              <p><?= $m['memSign'] ?></p>
+            </div>
+
+            <div class="card__commands">
+              <button>Modifier</button>
+              <button>Supprimer</button>
+            </div>
+
+          </div>
+
+
+        <?php } ?>
+
+      </div>
+
+
+    </section>
+
+
+
+
+
+  </main>
+
+  <!-- MK -- FOOTER -->
+  <footer>
+    <p>doctypematt &copy; 2022</p>
+  </footer>
+
+</body>
+
+</html>

@@ -1,39 +1,25 @@
-* {
-  box-sizing: border-box;
-  font-family: monospace;
-}
-
 body {
-  background: #f8f9fa;
-  color: #212529;
-  width: 80%;
-  margin: 0 auto;
-}
+  font-family: 'Nunito', sans-serif;
 
-section {
-  background: hsl(210, 20%, 92%);
-  padding: 1rem;
-  margin: 1rem 0;
-}
+  background: #fff0d3;
 
-form * {
-  font-size: 1.5rem;
-  font-family: monospace;
-}
 
-.crew__wrapper {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+
+  min-height: 100vh;
 }
 
-.card {
-  border: 1px solid #212529;
-  width: 22%;
-
-  padding: 1rem;
-  margin: 1rem;
+h1,
+h2,
+h3 {
+  font-family: 'Rancho', cursive;
+  color: #813900;
 }
 
-.avat_img {
-  max-width: 60px;
+
+
+.container {
+  /* border: 1px solid #198754 !important; */
 }
+

@@ -1,0 +1,121 @@
+
+ 
+header {
+  background: #813900;
+  color: #f8f9fa;
+}
+
+footer {
+  background: #ffD37D;
+  margin-top: auto;
+}
+
+.hero__icon {
+  width: 48px;
+}
+
+.avat_img {
+  max-width: 60px;
+}
+
+
+.modal__btn {
+  width: 36%;
+}
+
+
+
+/* T*T -- form */
+
+label {
+  color: #b4c1cc !important;
+}
+
+.form__top {
+  /* border: 4px solid cyan; */
+}
+
+.form__bottom {
+  /* border: 4px solid blue; */
+}
+
+.form__top__avat {
+  /* border: 4px solid #ffc107; */
+}
+
+.form__avat__img {
+  width: 15vw;
+  max-width: 180px;
+}
+
+.avat__arrow {
+  /* background: yellow; */
+  cursor: pointer;
+}
+
+
+
+
+
+.form__top__info {
+  /* border: 4px solid #099f9f; */
+}
+
+.form__bottom {
+
+}
+
+
+output {
+  display: block;
+}
+
+
+
+
+.crew__member {
+  background: #f8f9fa;
+}
+
+
+.command__btn {
+  width: 40px;
+  height: 40px;
+
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+}
+
+
+.edit__btn {
+  background-image: url('../icons/ui_edit.svg');
+}
+
+.delete__btn {
+  background-image: url('../icons/ui_trash.svg');
+}
+
+
+.skill {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90%;
+}
+
+.skill__navg {
+  background-image: url('../icons/solid_vessel_alt.png');
+}
+
+.skill__comb {
+  background-image: url('../icons/solid_sword.png');
+}
+
+.skill__star {
+  color: #ff1426;
+}

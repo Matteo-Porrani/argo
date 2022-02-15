@@ -1,3 +1,11 @@
+:root {
+  --c-brown: #813900;
+  --c-yell: #ffb630;
+  --c-softgray: #b4c1cc;
+  --c-xlight: #f0f2f4;
+}
+
+
 body {
   font-family: 'Nunito', sans-serif;
   /* background: #fff0d3; */
@@ -14,18 +22,19 @@ h1,
 h2,
 h3 {
   font-family: 'Rancho', cursive;
-  color: #813900;
+  color: var(--c-brown);
 }
 
 header {
   /* background: #813900; */
-  background: #ffb630;
+  background: var(--c-yell);
 }
 
 footer {
   /* background: #ffD37D; */
-  background: #813900;
-  color: #f8f9fa;
+  /* background: #813900; */
+  background: var(--bs-dark);
+  color: var(--bs-light);
   margin-top: auto;
 }
 
@@ -39,24 +48,24 @@ footer {
 }
 
 .input__alert {
-  outline: 2px solid #dc3545;
+  outline: 2px solid var(--bs-danger);
 }
 
 .bg-lightgray {
-  background: #f0f2f4;
+  background: var(--c-xlight);
 }
 
 .text-lightgray {
-  color: #f0f2f4;
+  color: var(--c-xlight);
 }
 
 /* .btn personnalisé */
 .btn-cust:hover {
-  color: #ffb630 !important;
+  color: var(--c-yell) !important;
 }
 
 .btn-cust:hover i {
-  color: #ffb630 !important;
+  color: var(--c-yell) !important;
 }
 
 /* s'applique aux boutons 'ANNULER' et 'SUPPRIMER' dans la modale */
@@ -66,7 +75,7 @@ footer {
 
 /* s'applique à l'icône delete dans la card */
 i.bi-trash3 {
-  color: #dc3545;
+  color: var(--bs-danger);
 }
 
 /* icône du bâteau dans le header */
@@ -84,18 +93,18 @@ i.bi-trash3 {
 
 .section__toggler {
   width: 15vw;
-  background: #f0f2f4;
-  color: #b4c1cc;
+  background: var(--c-xlight);
+  color: var(--c-softgray);
 }
 
 .section__toggler:hover {
-  background: #212529;
-  color: #f8f9fa;
+  background: var(--bs-dark);
+  color: var(--bs-light);
 }
 
 .section__toggler.active {
-  background: #ffb630;
-  color: #212529;
+  background: var(--c-yell);
+  color: var(--bs-dark);
 }
 
 
@@ -118,14 +127,14 @@ output {
 
 /* bouton de validation du formulaire */
 .form__submit__btn {
-  background: #ffb630;
-  color: #212529;
+  background: var(--c-yell);
+  color: var(--bs-dark);
   width: 50%;
 }
 
 .form__submit__btn:hover {
-  background: #212529;
-  color: #f8f9fa;
+  background: var(--bs-dark);
+  color: var(--bs-light);
 }
 
 
@@ -133,7 +142,7 @@ output {
 /* CARDS ++++++++++++++++++++++++++++++++++++ */
 
 .crew__member {
-  background: #f0f2f4;
+  background: var(--c-xlight);
 }
 
 .crew__member__head {
@@ -169,7 +178,7 @@ output {
 }
 
 .skill__star {
-  color: #ffb630;
+  color: var(--c-yell);
 }
 
 /* boutons edit/delete dans la card */
@@ -202,5 +211,4 @@ output {
   100% {
     transform: scale(1);
   }
-  
 }

@@ -36,10 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
 
     // A*A -- c'est un ajout / modification
-    // echo "POST request / form submitted";
-    // debugPR($_POST);
 
-    // T*T -- vérification de l'input
+    // MK -- vérification de formulaire
 
     $expected = ['f_id', 'f_icon', 'f_name', 'f_sign', 'f_navg', 'f_comb'];
     $required = ['f_name', 'f_sign'];
@@ -63,11 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
 
     }
-
-    // debugPR(($errors));
-    // debugPR(($missing));
-
-
 
     if ($errors) {
       // MK -- si ERREURS ...
@@ -100,8 +93,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // on ajoute l'id en 'queue' de array pour modifier l'élément
         $memberData[] = $_POST['f_id'];
-        // echo 'content of $memberData';
-        // debugPR($memberData);
 
         $res = updateMember($memberData);
         $feedback = "L'élément {$_POST['f_name']} a bien été modifié.";
@@ -112,14 +103,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $feedback = "L'élément {$_POST['f_name']} a bien été ajouté.";
 
       }
-
-      // echo ('<br>query has affected ' . $res . ' lines');
     }
   }
 }
 
 
-// MK -- GET METHOD + action & id
+
+// MK -- si requête en GET avec paramètres 'action' & 'id'...
 if (
   $_SERVER['REQUEST_METHOD'] === 'GET'
   && isset($_GET['action'])
@@ -129,11 +119,9 @@ if (
 
   $showCrewSection = 'd-none';
   $showFormSection = 'd-block';
-
 }
 
 
 $memberList = getMemberList();
-
 
 require_once('views/index.phtml');

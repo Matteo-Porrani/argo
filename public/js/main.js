@@ -1,16 +1,17 @@
 
-
+// sections
 const sectionCrew = document.querySelector('#crew');
 const sectionForm = document.querySelector('#member');
 
+// boutons de section
+const showCrewBtn = document.querySelector('#showCrew');
 const addMemberBtn = document.querySelector('#addMember');
 
-// const sectionTogglers = document.querySelectorAll('.section__toggler');
 
 
 
 
-
+// A*A -- gestion AVATAR dans formulaire
 
 const iconHiddenInput = document.querySelector('#p_icon');
 
@@ -19,8 +20,7 @@ const avaButtons = document.querySelectorAll('.avat__arrow');
 
 
 
-
-
+// on capte une 'modification' d'élément
 if (location.search.match(/edit/)) {
 
   const urlElements = avatarImage.src.split('/');
@@ -33,37 +33,29 @@ if (location.search.match(/edit/)) {
 
 }
 
+// GET NUMERIC VALUE IN STRING
+// You can use a regex to get the first integer :
+// var num = parseInt(str.match(/\d+/),10)
 
 
 
 
-
-/*
-sectionTogglers.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-
-    const target = e.target.dataset.toggle;
-
-    if (target === 'crew') {
-      showCrew();
-    } else if (target === 'form') {
-      showForm();
-    }
-
-  });
-});
-*/
-
+// A*A -- event listener sur bouton '#addMember'
+showCrewBtn.addEventListener('click', showCrew);
 addMemberBtn.addEventListener('click', showForm);
 
-
-
 function showCrew() {
+  showCrewBtn.classList.add('active');
+  addMemberBtn.classList.remove('active');
+
   sectionCrew.classList.remove('d-none');
   sectionForm.classList.add('d-none');
 }
 
 function showForm() {
+  showCrewBtn.classList.remove('active');
+  addMemberBtn.classList.add('active');
+
   sectionCrew.classList.add('d-none');
   sectionForm.classList.remove('d-none');
 }
@@ -72,157 +64,8 @@ function showForm() {
 
 
 
-
-
-
-
-
-
-
-
-// GET NUMERIC VALUE IN STRING
-
-// You can use a regex to get the first integer :
-
-// var num = parseInt(str.match(/\d+/),10)
-
-
-
-
-
-avaButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    changeAvatar(e.target.dataset.arrow);
-  });
-});
-
-
-function changeAvatar(direction) {
-
-  currAvatId = parseInt(iconHiddenInput.value)
-
-  // if (direction == 'right') {
-  //   if (currAvatId <= 14) {
-  //     currAvatId++;
-  //   }
-  // } else if (direction == 'left') {
-  //   if (currAvatId > 1) {
-  //     currAvatId--;
-  //   }
-  // }
-
-
-  if (direction == 'right') {
-      currAvatId++;
-  } else if (direction == 'left') {
-      currAvatId--;
-  }
-
-  if (currAvatId === 0) {
-    currAvatId = 15;
-  }
-
-  if (currAvatId === 16) {
-    currAvatId = 1;
-  }
-
-
-  iconHiddenInput.value = currAvatId;
-  avatarImage.src = `public/icons/ava_${currAvatId}.png`;
-
-  // console.log(iconHiddenInput.value);
-}
-
-
-
-const navgHiddenInput = document.querySelector('#f_navg');
-const combHiddenInput = document.querySelector('#f_comb');
-
-const navgStarOutput = document.querySelector('.navg__star__output');
-const combStarOutput = document.querySelector('.comb__star__output');
-
-// console.log(navgStarOutput.dataset.navgstars);
-// console.log(combStarOutput.dataset.combstars);
-
-
-function displayNavgStars(count) {
-  let navgShowStars = "";
-  for (let i = 1; i <= count; i++) {
-    navgShowStars += '<i class="bi bi-star-fill fs-3 mx-1"></i>';
-  }
-  navgStarOutput.innerHTML = navgShowStars;
-}
-
-
-function displayCombStars(count) {
-  let combShowStars = "";
-  for (let i = 1; i <= count; i++) {
-    combShowStars += '<i class="bi bi-star-fill fs-3 mx-1"></i>';
-  }
-  combStarOutput.innerHTML = combShowStars;
-}
-
-
-// first display
-displayNavgStars(navgHiddenInput.value);
-displayCombStars(combHiddenInput.value);
-
-
-const navgButtons = document.querySelectorAll('.navg__btn');
-
-navgButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    changeNavgStars(e.target.dataset.navgbtn);
-  });
-});
-
-
-function changeNavgStars(mode) {
-  currNavgStars = navgHiddenInput.value;
-
-  if (mode == 'plus' && currNavgStars <= 5) {
-    currNavgStars++;
-  } else if (mode == 'mins' && currNavgStars >= 2) {
-    currNavgStars--;
-  }
-
-  navgHiddenInput.value = currNavgStars;
-  displayNavgStars(currNavgStars);
-}
-
-
-const combButtons = document.querySelectorAll('.comb__btn');
-
-combButtons.forEach(btn => {
-  btn.addEventListener('click', (e) => {
-    changeCombStars(e.target.dataset.combbtn);
-  });
-});
-
-
-function changeCombStars(mode) {
-  currCombStars = combHiddenInput.value;
-
-  if (mode == 'plus' && currCombStars <= 5) {
-    currCombStars++;
-  } else if (mode == 'mins' && currCombStars >= 2) {
-    currCombStars--;
-  }
-
-  combHiddenInput.value = currCombStars;
-  displayCombStars(currCombStars);
-}
-
-
-
-
-
-
-
-
-
+// A*A -- gestion du bouton DELETE dans la card
 const deleteButtons = document.querySelectorAll('.delete__btn');
-
 
 deleteButtons.forEach(btn => {
   btn.addEventListener('click', (e) => {
@@ -234,8 +77,8 @@ deleteButtons.forEach(btn => {
     const delItemNameSpan = document.querySelector('.delItemName');
     const delItemHiddenId = document.querySelector('#mod_form_mem_id');
 
-    delItemNameSpan.innerHTML = e.target.dataset.name;
-    delItemHiddenId.value = e.target.dataset.id;
+    delItemNameSpan.innerHTML = e.currentTarget.dataset.name;
+    delItemHiddenId.value = e.currentTarget.dataset.id;
 
   });
 });

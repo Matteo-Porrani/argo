@@ -10,14 +10,20 @@ require_once('data/database.php');
 require_once('models/argo_queries.php');
 
 
+
+
+$showCrewSection = 'd-block';
+$showFormSection = 'd-none';
+
+
 // T*T -- form handling
 
 
-// A*A -- POST method
+// MK -- POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-
   if (isset($_POST['mod_form_delete'])) {
+
     // A*A -- c'est une SUPPRESSION
     $memberId = $_POST['mod_form_mem_id'];
     deleteMember($memberId);
@@ -28,60 +34,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // echo "POST request / form submitted";
     // debugPR($_POST);
 
-    $memberData = [
-      $_POST['f_name'],
-      $_POST['f_sign'],
-      "ava_{$_POST['f_icon']}.png",
-      $_POST['f_navg'],
-      $_POST['f_comb']
-    ];
+    // T*T -- vérification de l'input
 
-    // A*A -- on détermine si create/edit
-    if (!empty($_POST['f_id'])) {
+    $expected = ['f_id', 'f_icon', 'f_name', 'f_sign', 'f_navg', 'f_comb'];
+    $required = ['f_name', 'f_sign'];
 
-      // on ajoute l'id en 'queue' de array pour modifier l'élément
-      $memberData[] = $_POST['f_id'];
-      // echo 'content of $memberData';
-      // debugPR($memberData);
+    $errors = false;
+    $missing = [];
 
-      $res = updateMember($memberData);
-    } else {
-      // 
-      $res = createMember($memberData);
+
+    foreach ($_POST as $key => $value) {
+
+      if (!in_array($key, $expected)) {
+        // ignore the value
+        continue;
+      }
+
+      if (in_array($key, $required) && empty($value)) {
+        // a required value is missing
+        $missing[] = $key;
+        $errors = true;
+        continue;
+      }
+
     }
 
-    // echo '<br>';
-    // echo ('query has affected ' . $res . ' lines');
+    // debugPR(($errors));
+    // debugPR(($missing));
 
+
+
+    if ($errors) {
+      // MK -- si ERREURS ...
+
+      $incompleteMember['memName'] = $_POST['f_name'];
+      $incompleteMember['memSign'] = $_POST['f_sign'];
+      $incompleteMember['memIcon'] = "public/icons/ava_{$_POST['f_icon']}.png";
+      $incompleteMember['memIconId'] = $_POST['f_icon'];
+      $incompleteMember['memNavg'] = $_POST['f_navg'];
+      $incompleteMember['memComb'] = $_POST['f_comb'];
+
+      $showCrewSection = 'd-none';
+      $showFormSection = 'd-block';
+
+    } else {
+
+      // MK -- si aucune erreur...
+
+      // création de l'array pour écriture en bdd
+      $memberData = [
+        $_POST['f_name'],
+        $_POST['f_sign'],
+        "ava_{$_POST['f_icon']}.png",
+        $_POST['f_navg'],
+        $_POST['f_comb']
+      ];
+
+      // A*A -- si 'f_id' est présent il s'agit d'une modification
+      if (!empty($_POST['f_id'])) {
+
+        // on ajoute l'id en 'queue' de array pour modifier l'élément
+        $memberData[] = $_POST['f_id'];
+        // echo 'content of $memberData';
+        // debugPR($memberData);
+
+        $res = updateMember($memberData);
+      } else {
+        // il s'agit d'une création
+        $res = createMember($memberData);
+      }
+
+      // echo ('<br>query has affected ' . $res . ' lines');
+    }
   }
 }
 
 
-// A*A -- GET METHOD + action & id
+// MK -- GET METHOD + action & id
 if (
   $_SERVER['REQUEST_METHOD'] === 'GET'
   && isset($_GET['action'])
 ) {
-
   // on récupère les données d'un membre pour remplir le formulaire
   $existingMember = getMemberById($_GET['id']);
-  // debugPR($existingMember);
+
+  $showCrewSection = 'd-none';
+  $showFormSection = 'd-block';
 
 }
 
 
-
-
-
-
-
-
-
-
 $memberList = getMemberList();
-
-// debugPR($memberList);
-
-
 
 require_once('views/index.phtml');

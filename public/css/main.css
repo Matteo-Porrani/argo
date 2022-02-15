@@ -1,47 +1,100 @@
+body {
+  font-family: 'Nunito', sans-serif;
+  /* background: #fff0d3; */
+  background: #fff;
 
- 
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Rancho', cursive;
+  color: #813900;
+}
+
 header {
-  background: #813900;
-  color: #f8f9fa;
+  /* background: #813900; */
+  background: #ffb630;
 }
 
 footer {
-  background: #ffD37D;
+  /* background: #ffD37D; */
+  background: #813900;
+  color: #f8f9fa;
   margin-top: auto;
 }
 
-.hero__icon {
-  width: 48px;
+
+
+/* UTILITY CLASSES ++++++++++++++++++++++++++++++++++++ */
+
+.alert {
+  padding: .25rem !important;
+  font-size: .75rem;
 }
 
-.avat_img {
-  max-width: 60px;
+.input__alert {
+  outline: 2px solid #dc3545;
 }
 
+.bg-lightgray {
+  background: #f0f2f4;
+}
 
+.text-lightgray {
+  color: #f0f2f4;
+}
+
+/* .btn personnalisé */
+.btn-cust:hover {
+  color: #ffb630 !important;
+}
+
+.btn-cust:hover i {
+  color: #ffb630 !important;
+}
+
+/* s'applique aux boutons 'ANNULER' et 'SUPPRIMER' dans la modale */
 .modal__btn {
   width: 36%;
 }
 
-
-
-/* T*T -- form */
-
-label {
-  color: #b4c1cc !important;
+/* s'applique à l'icône delete dans la card */
+i.bi-trash3 {
+  color: #dc3545;
 }
 
-.form__top {
-  /* border: 4px solid cyan; */
+/* icône du bâteau dans le header */
+.hero__icon {
+  width: 40px;
 }
 
-.form__bottom {
-  /* border: 4px solid blue; */
+
+
+/* MAIN ELEMENTS ++++++++++++++++++++++++++++++++++++ */
+
+.section__toggler {
+  width: 15vw;
+  background: #f0f2f4;
+  color: #b4c1cc;
 }
 
-.form__top__avat {
-  /* border: 4px solid #ffc107; */
+.section__toggler:hover {
+  background: #212529;
+  color: #f8f9fa;
 }
+
+.section__toggler.active {
+  background: #ffb630;
+  color: #212529;
+}
+
+
+
+/* FORM ++++++++++++++++++++++++++++++++++++ */
 
 .form__avat__img {
   width: 15vw;
@@ -49,63 +102,56 @@ label {
 }
 
 .avat__arrow {
-  /* background: yellow; */
   cursor: pointer;
 }
-
-
-
-
-
-.form__top__info {
-  /* border: 4px solid #099f9f; */
-}
-
-.form__bottom {
-
-}
-
 
 output {
   display: block;
 }
 
 
+/* bouton de validation du formulaire */
+.form__submit__btn {
+  background: #ffb630;
+  color: #212529;
+  width: 50%;
+}
 
+.form__submit__btn:hover {
+  background: #212529;
+  color: #f8f9fa;
+}
+
+
+
+/* CARDS ++++++++++++++++++++++++++++++++++++ */
 
 .crew__member {
-  background: #f8f9fa;
+  background: #f0f2f4;
 }
 
-
-.command__btn {
-  width: 40px;
-  height: 40px;
-
-  background-size: 80%;
+.crew__member__head {
+  /* border: 1px solid #ee5a24; */
+  background-image: url('../icons/bg_circle.svg');
   background-position: center;
   background-repeat: no-repeat;
-
+  background-size: 30%;
+  background-clip: border-box;
 }
 
-
-.edit__btn {
-  background-image: url('../icons/ui_edit.svg');
+.avat_img {
+  max-width: 60px;
 }
 
-.delete__btn {
-  background-image: url('../icons/ui_trash.svg');
-}
-
-
+/* section skills */
 .skill {
   display: inline-block;
-  width: 32px;
-  height: 32px;
-
+  width: 26px;
+  height: 26px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: 90%;
+  margin-right: .5rem;
 }
 
 .skill__navg {
@@ -117,5 +163,11 @@ output {
 }
 
 .skill__star {
-  color: #ff1426;
+  color: #ffb630;
+}
+
+/* boutons edit/delete dans la card */
+.command__btn {
+  width: 40px;
+  height: 40px;
 }

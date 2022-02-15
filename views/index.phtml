@@ -17,7 +17,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Rancho&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="public/css/base.css">
   <link rel="stylesheet" href="public/css/main.css">
   <link rel="stylesheet" href="public/css/quer.css">
 
@@ -26,9 +25,9 @@
 
 <body>
 
-  <!-- Modal -->
+  <!-- MK -- MODAL -->
   <div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
       <div class="modal-content">
 
         <div class="modal-header">
@@ -58,16 +57,14 @@
   </div>
 
 
-
-
   <!-- MK -- HEADER -->
-  <header class="p-3">
+  <header class="p-2">
 
     <div class="container">
-      <h1>
-        <img class="hero__icon" src="public/icons/helmet.png" alt="">
-        <a class="link link-light text-decoration-none" href="index.php">Argonautes 3.0</a>
-        <img class="hero__icon" src="public/icons/vessel.png" alt="">
+      <h1 class="d-flex align-items-center">
+        <!-- <img class="hero__icon" src="public/icons/helmet.png" alt=""> -->
+        <img class="hero__icon me-2" src="public/icons/vessel.png" alt="">
+        <a class="link link-dark text-decoration-none" href="index.php">Argonautes 3.0</a>
       </h1>
     </div>
 
@@ -77,138 +74,191 @@
   <!-- ####### MAIN ####### -->
   <main>
 
-  <!--
     <section id="menu" class="my-3">
       <div class="container">
         <div class="row">
-          <div class="col-6 text-center">
-            <a class="btn btn-outline-dark btn-lg section__toggler" data-toggle="crew">Equipage</a>
+          <div class="col-6">
+
+            <a id="showCrew" class="btn section__toggler p-2 active" data-toggle="crew">
+              <i class="bi bi-list-task fs-2 p-1"></i>
+            </a>
+
           </div>
-          <div class="col-6 text-center">
-            <a class="btn btn-outline-dark btn-lg section__toggler" data-toggle="form">Formulaire</a>
+          <div class="col-6">
+
+            <a id="addMember" class="btn section__toggler p-2" data-toggle="form">
+              <i class="bi bi-person-plus fs-2"></i>
+            </a>
+
           </div>
         </div>
       </div>
     </section>
-  -->
-    <section id="member" class="d-none">
+
+    <section id="member" class="<?= $showFormSection ?>">
 
       <div class="container">
 
         <!-- T*T -- FORM -->
 
-        <form action="index.php" method="POST">
+        <form action="index.php" method="POST" class="mx-3 mx-lg-0">
 
           <!-- A*A -- condition create/edit -->
           <?php
           if (isset($existingMember)) {
+            // A*A -- si $existingMember existe, on est en modification
             $prefill_id = $existingMember['memId'];
             $prefill_name = $existingMember['memName'];
+            $name_alert_show = "d-none";
+            $name_input_show = "";
             $prefill_sign = $existingMember['memSign'];
+            $sign_alert_show = "d-none";
+            $sign_input_show = "";
+
             $prefill_icon = "public/icons/{$existingMember['memIcon']}";
+            $prefill_icon_id = $existingMember['memIcon'];
+
             $prefill_navg = $existingMember['memNavg'];
             $prefill_comb = $existingMember['memComb'];
             $formMode = "Modification d'un membre existant";
-          } else {
+          } else if (isset($incompleteMember)) {
+            // A*A -- ici on a un formulaire incomplet
+            // seulement certains champs ont des valeurs
+
             $prefill_id = "";
+
+            // NAME
+            if (!empty($incompleteMember['memName'])) {
+              $prefill_name = $incompleteMember['memName'];
+              $name_alert_show = "d-none";
+              $name_input_show = "";
+            } else {
+              $prefill_name = "";
+              $name_alert_show = "d-inline-block";
+              $name_input_show = "input__alert";
+            }
+
+            // SIGN
+            if (!empty($incompleteMember['memSign'])) {
+              $prefill_sign = $incompleteMember['memSign'];
+              $sign_alert_show = "d-none";
+              $sign_input_show = "";
+            } else {
+              $prefill_sign = "";
+              $sign_alert_show = "d-inline-block";
+              $sign_input_show = "input__alert";
+            }
+
+            isset($incompleteMember['memIcon']) ? $prefill_icon = $incompleteMember['memIcon'] : $prefill_icon = "";
+            isset($incompleteMember['memIconId']) ? $prefill_icon_id = $incompleteMember['memIconId'] : $prefill_icon_id = "1";
+
+            isset($incompleteMember['memNavg']) ? $prefill_navg = $incompleteMember['memNavg'] : $prefill_navg = "";
+            isset($incompleteMember['memComb']) ? $prefill_comb = $incompleteMember['memComb'] : $prefill_comb = "";
+
+            $formMode = "Création d'un nouveau membre";
+          } else {
+            // A*A -- ici on a un formulaire de création
+            $prefill_id = "";
+
             $prefill_name = "";
+            $name_alert_show = "d-none";
+            $name_input_show = "";
+
             $prefill_sign = "";
+            $sign_alert_show = "d-none";
+            $sign_input_show = "";
+
             $prefill_icon = "public/icons/ava_1.png";
+            $prefill_icon_id = "1";
             $prefill_navg = "1";
             $prefill_comb = "1";
             $formMode = "Création d'un nouveau membre";
           }
           ?>
 
-          <h3 class="text-center"><?= $formMode ?></h3>
+          <h3 class="text-center text-lg-start"><?= $formMode ?></h3>
 
-          <div class="row form__top mb-5 p-3">
-
-            <input type="hidden" name="f_icon" id="p_icon" value="1">
+          <div class="row form__top mb-3">
 
             <!-- A*A -- AVATAR -->
-            <div class="col-12 col-lg-6 form__top__avat">
+            <input type="hidden" name="f_icon" id="p_icon" value="<?= $prefill_icon_id ?>">
+            <div class="col-12 col-lg-6 px-lg-5 form__top__avat">
 
               <div class="row">
                 <div class="col-2 text-center d-flex justify-content-center align-items-center">
-                  <i class="bi bi-caret-left fs-1 avat__arrow" data-arrow="left"></i>
+                  <i class="btn-cust bi bi-caret-left fs-1 avat__arrow" data-arrow="left"></i>
                 </div>
 
                 <div class="col-8 text-center">
-                  <img class="form__avat__img" src="<?= $prefill_icon ?>" alt="">
+                  <img class="form__avat__img mb-3 mb-lg-0" src="<?= $prefill_icon ?>" alt="">
                 </div>
 
                 <div class="col-2 text-center d-flex justify-content-center align-items-center">
-                  <i class="bi bi-caret-right fs-1 avat__arrow" data-arrow="right"></i>
+                  <i class="btn-cust bi bi-caret-right fs-1 avat__arrow" data-arrow="right"></i>
                 </div>
 
               </div>
             </div>
 
-
-
-
-
-
-            <div class="col-12 col-lg-6 form__top__info">
-
+            <!-- A*A -- NAME & SIGN -->
+            <div class="col-12 col-lg-6 form__top__info p-3 rounded rounded-3 bg-lightgray">
               <!-- hidden input -->
               <input type="hidden" name="f_id" id="f_id" value="<?= $prefill_id ?>">
 
-              <p>
-                <label class="form-label" for="f_name">Nom</label>
-                <input class="form-control" type="text" name="f_name" id="f_name" value="<?= $prefill_name ?>" required>
-              </p>
+              <label class="form-label" for="f_name">Nom
+                <span class="my-0 alert alert-danger <?= $name_alert_show ?>">Veuillez fournir un nom</span>
+              </label>
+              <input class="form-control mb-3 <?= $name_input_show ?>" type="text" name="f_name" id="f_name" value="<?= htmlentities($prefill_name) ?>">
 
-              <p>
-                <label class="form-label" for="f_sign">Signes particuliers</label>
-                <input class="form-control" type="text" name="f_sign" id="f_sign" value="<?= $prefill_sign ?>">
-              </p>
 
+              <label class="form-label" for="f_sign">Description
+                <span class="my-0 alert alert-danger <?= $sign_alert_show ?>">Veuillez fournir une description</span>
+              </label>
+              <input class="form-control mb-3 <?= $sign_input_show ?>" type="text" name="f_sign" id="f_sign" value="<?= htmlentities($prefill_sign) ?>">
             </div>
 
           </div> <!-- end of .form__top -->
 
 
-          <div class="row form__bottom mb-5 p-3">
-
+          <!-- A*A -- SKILLS -->
+          <div class="row form__bottom mb-3 p-3 rounded rounded-3 bg-lightgray">
 
             <!-- A*A -- NAVIGATION -->
             <div class="col-12 col-lg-6 form__bottom__navg">
 
-              <div class="row">
-                <div class="col-8">
+              <div class="row align-items-center">
+                <div class="col-4">
                   <label for="f_navg">Navigation</label>
                   <input type="hidden" name="f_navg" id="f_navg" value="<?= $prefill_navg ?>">
                 </div>
-
-                <div class="col-4">
-                  <i class="navg__btn bi bi-dash-square fs-3" data-navgbtn="mins"></i>
-                  <i class="navg__btn bi bi-plus-square fs-3" data-navgbtn="plus"></i>
+                <!-- buttons -->
+                <div class="col-8">
+                  <i class="skill__btn btn-cust bi bi-dash-square fs-2 mx-2" data-tgt="navg" data-act="mins"></i>
+                  <i class="skill__btn btn-cust bi bi-plus-square fs-2 mx-2" data-tgt="navg" data-act="plus"></i>
                 </div>
               </div>
 
-              <output class="navg__star__output"></output>
+              <output id="out_navg"></output>
 
             </div>
 
             <!-- A*A -- COMBAT -->
             <div class="col-12 col-lg-6 form__bottom__comb">
 
-              <div class="row">
-                <div class="col-8">
+              <div class="row align-items-center">
+                <div class="col-4">
                   <label for="f_comb">Combat</label>
                   <input type="hidden" name="f_comb" id="f_comb" value="<?= $prefill_comb ?>">
                 </div>
-
-                <div class="col-4">
-                  <i class="comb__btn bi bi-dash-square fs-3" data-combbtn="mins"></i>
-                  <i class="comb__btn bi bi-plus-square fs-3" data-combbtn="plus"></i>
+                <!-- buttons -->
+                <div class="col-8">
+                  <i class="skill__btn btn-cust bi bi-dash-square fs-2 mx-2" data-tgt="comb" data-act="mins"></i>
+                  <i class="skill__btn btn-cust bi bi-plus-square fs-2 mx-2" data-tgt="comb" data-act="plus"></i>
                 </div>
 
               </div>
 
-              <output class="comb__star__output"></output>
+              <output id="out_comb"></output>
 
             </div>
 
@@ -216,7 +266,7 @@
 
 
           <div class="form__submit mb-3 p-3 text-center">
-            <button class="btn btn-outline-dark" type="submit">Enregistrer</button>
+            <button class="btn btn-lg form__submit__btn" type="submit">Enregistrer</button>
           </div>
 
 
@@ -228,7 +278,7 @@
     </section>
 
     <!-- T*T -- CREW -->
-    <section id="crew" class="my-3">
+    <section id="crew" class="my-3 <?= $showCrewSection ?>">
 
       <div class="container">
 
@@ -237,69 +287,72 @@
         <div class="crew__wrapper">
 
           <?php foreach ($memberList as $m) { ?>
+
             <div class="row crew__member rounded rounded-3 p-1 mx-1 my-3">
 
-              <div class="col-2 d-flex align-items-center">
-                <img class="avat_img" src="public/icons/<?= $m['memIcon'] ?>" alt="">
+              <!-- A*A -- (A) -->
+              <div class="col-12 col-lg-1 d-flex justify-content-center align-items-center crew__member__head">
+                <img class="avat_img p-1" src="public/icons/<?= $m['memIcon'] ?>" alt="">
               </div>
 
-              <div class="col-8">
+              <!-- A*A -- (B) -->
+              <div class="col-12 col-lg-6 crew__member__primary">
+                <!-- memName -->
+                <h3 class="text-center text-lg-start"><?= $m['memName'] ?></h3>
+                <!-- memSign -->
+                <p class=""><?= $m['memSign'] ?></p>
+              </div>
 
-                <div class="row">
+              <!-- A*A -- (C) -->
+              <div class="col-12 col-lg-5 crew__member__secondary">
+                <div class="row align-items-center">
+                  <!-- STARS -->
+                  <div class="col-9">
 
-                  <!-- A -->
-                  <div class="col-12 col-lg-6">
-                    <!-- name -->
-                    <h3><?= $m['memName'] ?></h3>
-
-                    <!-- signs -->
-                    <p><?= $m['memSign'] ?></p>
-                  </div>
-
-                  <!-- B -->
-                  <div class="col-12 col-lg-6">
                     <!-- navg -->
                     <div class="d-flex align-items-center my-1">
                       <span class="skill skill__navg"></span>
-  
                       <?php for ($i = 1; $i <= $m['memNavg']; $i++) { ?>
                         <i class="skill__star bi bi-star-fill mx-1"></i>
                       <?php } ?>
                     </div>
-                                        
+
                     <!-- comb -->
                     <div class="d-flex align-items-center my-1">
                       <span class="skill skill__comb"></span>
-  
                       <?php for ($i = 1; $i <= $m['memComb']; $i++) { ?>
                         <i class="skill__star bi bi-star-fill mx-1"></i>
                       <?php } ?>
                     </div>
 
                   </div>
-
+                  <!-- COMMANDS -->
+                  <div class="col-3 card__commands d-flex justify-content-center align-items-center px-4">
+                    <!-- EDIT -->
+                    <a class="btn btn-cust p-2 m-1 command__btn edit__btn" href="index.php?action=edit&id=<?= $m['memId'] ?>">
+                      <i class="bi bi-pencil-square fs-3"></i>
+                    </a>
+                    <!-- DELETE -->
+                    <a class="btn btn-cust p-2 m-1 command__btn delete__btn" data-id="<?= $m['memId'] ?>" data-name="<?= $m['memName'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                      <i class="bi bi-trash3 fs-3"></i>
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              <div class="col-2 card__commands d-flex flex-column flex-lg-row justify-content-center align-items-center">
-
-                <a class="btn btn-outline-secondary m-1 command__btn edit__btn" href="index.php?action=edit&id=<?= $m['memId'] ?>">
-                  <!-- <i class="bi bi-pencil-square"></i> -->
-                </a>
-
-                <a class="btn btn-outline-secondary m-1 command__btn delete__btn" data-id="<?= $m['memId'] ?>" data-name="<?= $m['memName'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                  <!-- <i class="bi bi-trash3 text-danger"></i> -->
-                </a>
               </div>
 
             </div>
 
-
           <?php } ?>
 
-        </div>
+        </div> <!-- end of crew__wrapper -->
 
-        <button id="addMember" type="button" class="btn btn-outline-secondary">Ajouter un membre</button>
+
+
+
+
+
+
+
 
       </div>
 
@@ -321,6 +374,7 @@
 
 
   <script src="public/js/main.js"></script>
+  <script src="public/js/form.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

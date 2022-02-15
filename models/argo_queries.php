@@ -14,7 +14,8 @@ function getMemberList() {
 }
 
 
-// donnés d'un membre
+
+// donnés d'un membre par id
 function getMemberById($id) {
   $pdo = connectToDatabase();
   $query = "
@@ -27,6 +28,7 @@ function getMemberById($id) {
   $stmt->execute([$id]);
   return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+
 
 
 // création d'un nouveau membre
@@ -45,6 +47,7 @@ function createMember($memberData) {
   $stmt->execute($memberData);
   return $stmt->rowCount();
 }
+
 
 
 // modification d'un membre existant
@@ -79,6 +82,3 @@ function deleteMember($memberId) {
   $stmt->execute([$memberId]);
   return $stmt->rowCount();
 }
-
-
-

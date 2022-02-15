@@ -1,7 +1,10 @@
-@media (min-width: 800px) {
-  
+@media (min-width: 992px) {
 
+  .section__toggler {
+    width: 8vw;
+  }
 
+  /* inversion ordre AVATAR & NOM+SIGNES */
   .form__top__avat {
     order: 2
   }
@@ -12,8 +15,12 @@
 
 
 
+  .form__submit__btn {
+    width: 25%;
+  }
 
-
-
+  .crew__member__head {
+    background-size: 140%;
+  }
 
 }

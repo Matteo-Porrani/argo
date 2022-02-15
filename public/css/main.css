@@ -6,6 +6,8 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+
+  overflow-x: hidden;
 }
 
 h1,
@@ -70,6 +72,10 @@ i.bi-trash3 {
 /* icône du bâteau dans le header */
 .hero__icon {
   width: 40px;
+}
+
+.footer__link {
+  font-size: .75rem !important;
 }
 
 
@@ -170,4 +176,31 @@ output {
 .command__btn {
   width: 40px;
   height: 40px;
+}
+
+
+.slide-right {
+  transition: all 1s ease-in-out;
+  transform: translateX(100%);
+  max-height: 0px;
+}
+
+.pulse {
+  animation: pulseAnim ease-in-out .6s;
+}
+
+@keyframes pulseAnim {
+  0% {
+    transform: scale(.92);
+  }
+  40% {
+    transform: scale(1.03);
+  }
+  60% {
+    transform: scale(.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+  
 }

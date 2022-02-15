@@ -82,3 +82,30 @@ deleteButtons.forEach(btn => {
 
   });
 });
+
+
+
+
+// MESSAGE DE CONFIRMATION
+
+const feedbackSection = document.querySelector('#feedback');
+
+if (feedbackSection.classList.contains('d-block')) {
+
+  setTimeout(function() {
+    feedbackSection.classList.add('pulse');
+  }, 100);
+
+
+  setTimeout(function() {
+    feedbackSection.classList.add('slide-right');
+    feedbackSection.classList.remove('d-block');
+
+    setTimeout(function() {
+      feedbackSection.classList.add('d-none');
+      feedbackSection.classList.remove('slide-right');
+    }, 950);
+
+  }, 3000);
+
+}

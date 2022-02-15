@@ -10,14 +10,15 @@ require_once('data/database.php');
 require_once('models/argo_queries.php');
 
 
-
-
+// display variables
 $showCrewSection = 'd-block';
 $showFormSection = 'd-none';
 
 
-// T*T -- form handling
+$res = 0;
+$feedback = "";
 
+// ##### form handling #####
 
 // MK -- POST method
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -26,7 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // A*A -- c'est une SUPPRESSION
     $memberId = $_POST['mod_form_mem_id'];
-    deleteMember($memberId);
+    
+    $res = deleteMember($memberId);
+    $feedback = "L'élément a bien été supprimé.";
+
+    // echo "résultat de suppression : {$res} lignes";
 
   } else {
 
@@ -99,9 +104,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // debugPR($memberData);
 
         $res = updateMember($memberData);
+        $feedback = "L'élément {$_POST['f_name']} a bien été modifié.";
+
       } else {
         // il s'agit d'une création
         $res = createMember($memberData);
+        $feedback = "L'élément {$_POST['f_name']} a bien été ajouté.";
+
       }
 
       // echo ('<br>query has affected ' . $res . ' lines');
@@ -125,5 +134,6 @@ if (
 
 
 $memberList = getMemberList();
+
 
 require_once('views/index.phtml');

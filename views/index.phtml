@@ -57,7 +57,7 @@
 
 
   <!-- MK -- HEADER -->
-  <header class="pt-2">
+  <header class="pt-2 mb-2">
     <div class="container">
       <h1 class="d-flex align-items-center">
         <!-- <img class="hero__icon me-3" src="public/icons/vessel.png" alt="le bateau des argonautes"> -->
@@ -65,14 +65,12 @@
         <a class="link link-dark logo__link text-decoration-none" href="index.php">les Argonautes 3.0</a>
       </h1>
     </div>
-
-    
+    <div class="tiles"></div>
   </header>
   
   
   <!-- MK -- MAIN -->
   <main>
-    <div class="tiles"></div>
     
     <?php
     if (!empty($feedback)) {
@@ -92,7 +90,7 @@
 
     <section id="menu" class="my-3">
       <div class="container">
-        <div class="row">
+        <div class="row px-1">
           <div class="col-6">
             <a id="showCrew" class="btn section__toggler p-2 active" data-toggle="crew">
               <i class="bi bi-list-task fs-2 p-1"></i>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -18,8 +18,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Rancho&display=swap" rel="stylesheet">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="public/css/main.css">
-  <link rel="stylesheet" href="public/css/quer.css">
+  <link rel="stylesheet" href="public/css/style.css">
 
   <title>Argonautes 3.0</title>
 </head>
@@ -58,20 +57,23 @@
 
 
   <!-- MK -- HEADER -->
-  <header class="p-2 mb-2">
+  <header class="pt-2">
     <div class="container">
       <h1 class="d-flex align-items-center">
-        <!-- <img class="hero__icon" src="public/icons/helmet.png" alt=""> -->
-        <img class="hero__icon me-2" src="public/icons/vessel.png" alt="">
-        <a class="link link-dark text-decoration-none" href="index.php">Argonautes 3.0</a>
+        <!-- <img class="hero__icon me-3" src="public/icons/vessel.png" alt="le bateau des argonautes"> -->
+        <img class="hero__icon" src="public/icons/argo_ship.svg" alt="le bateau des argonautes">
+        <a class="link link-dark logo__link text-decoration-none" href="index.php">les Argonautes 3.0</a>
       </h1>
     </div>
+
+    
   </header>
-
-
+  
+  
   <!-- MK -- MAIN -->
   <main>
-
+    <div class="tiles"></div>
+    
     <?php
     if (!empty($feedback)) {
       $displayFeedback = 'd-block';
@@ -166,7 +168,7 @@
 
             $formMode = "Création d'un nouveau membre";
           } else {
-            // A*A -- ici on a un formulaire de création
+            // A*A -- formulaire de création
             $prefill_id = "";
 
             $prefill_name = "";
@@ -189,7 +191,7 @@
 
           <div class="row form__top mb-3">
 
-            <!-- A*A -- AVATAR -->
+            <!-- AVATAR -->
             <input type="hidden" name="f_icon" id="p_icon" value="<?= $prefill_icon_id ?>">
             <div class="col-12 col-lg-6 px-lg-5 form__top__avat">
 
@@ -199,7 +201,7 @@
                 </div>
 
                 <div class="col-8 text-center">
-                  <img class="form__avat__img mb-3 mb-lg-0" src="<?= $prefill_icon ?>" alt="">
+                  <img class="form__avat__img mb-3 mb-lg-0" src="<?= $prefill_icon ?>" alt="avatar de l'argonaute">
                 </div>
 
                 <div class="col-2 text-center d-flex justify-content-center align-items-center">
@@ -209,7 +211,7 @@
               </div>
             </div>
 
-            <!-- A*A -- NAME & SIGN -->
+            <!-- NAME & SIGN -->
             <div class="col-12 col-lg-6 form__top__info p-3 rounded rounded-3 bg-lightgray">
               <!-- hidden input -->
               <input type="hidden" name="f_id" id="f_id" value="<?= $prefill_id ?>">
@@ -228,10 +230,10 @@
           </div> <!-- end of .form__top -->
 
 
-          <!-- A*A -- SKILLS -->
+          <!-- SKILLS -->
           <div class="row form__bottom mb-3 p-3 rounded rounded-3 bg-lightgray">
 
-            <!-- A*A -- NAVIGATION -->
+            <!-- navigation -->
             <div class="col-12 col-lg-6 form__bottom__navg">
 
               <div class="row align-items-center">
@@ -249,7 +251,7 @@
               <output id="out_navg"></output>
             </div>
 
-            <!-- A*A -- COMBAT -->
+            <!-- combat -->
             <div class="col-12 col-lg-6 form__bottom__comb">
 
               <div class="row align-items-center">
@@ -280,8 +282,8 @@
     </section>
 
     <!-- T*T -- CREW -->
-    <section id="crew" class="my-3 <?= $showCrewSection ?>">
 
+    <section id="crew" class="my-3 <?= $showCrewSection ?>">
       <div class="container">
 
         <?php
@@ -289,70 +291,74 @@
         $missCount = 50 - $currCount;
         ?>
 
-        <p class="m-1">Votre équipage compte actuellement <?= $currCount ?> membres.</p>
-        <p class="m-1">Il ne reste plus que <?= $missCount ?> vaillants guerriers à trouver, et nous pourrons larguer les amarres !</p>
+        <p class="px-3 my-4">Votre équipage compte déjà <?= $currCount ?> argonautes.<br>
+          Il ne reste plus que <?= $missCount ?> courageux volontaires à recruter, et nous pourrons larguer les amarres !
+        </p>
 
-        <div class="crew__wrapper">
+        <div class="row crew__wrapper">
 
           <?php foreach ($memberList as $m) { ?>
 
-            <div class="row crew__member rounded rounded-3 p-1 mx-1 my-3">
+            <article class="col-12 col-lg-4 px-3">
+              <div class="crew__member rounded rounded-3 mb-3">
 
-              <!-- A*A -- (A) -->
-              <div class="col-12 col-lg-1 d-flex justify-content-center align-items-center crew__member__head">
-                <img class="avat_img p-1" src="public/icons/<?= $m['memIcon'] ?>" alt="">
-              </div>
+                <!-- A*A -- LIGNE 1 -->
+                <div class="row mb-2">
+                  <!-- AVATAR -->
+                  <div class="col-4 d-flex justify-content-center align-items-center p-2 crew__member__head">
+                    <img class="avat__img p-1" src="public/icons/<?= $m['memIcon'] ?>" alt="avatar de l'argonaute">
+                  </div>
+                  <!-- SKILLS -->
+                  <div class="col-8 d-flex align-items-center">
 
-              <!-- A*A -- (B) -->
-              <div class="col-12 col-lg-6 crew__member__primary">
-                <!-- memName -->
-                <h3 class="text-center text-lg-start"><?= $m['memName'] ?></h3>
-                <!-- memSign -->
-                <p class=""><?= $m['memSign'] ?></p>
-              </div>
-
-              <!-- A*A -- (C) -->
-              <div class="col-12 col-lg-5 crew__member__secondary">
-                <div class="row align-items-center">
-                  <!-- STARS -->
-                  <div class="col-9">
-
-                    <!-- navg -->
-                    <div class="d-flex align-items-center my-1">
-                      <span class="skill skill__navg"></span>
-                      <?php for ($i = 1; $i <= $m['memNavg']; $i++) { ?>
-                        <i class="skill__star bi bi-star-fill mx-1"></i>
-                      <?php } ?>
-                    </div>
-
-                    <!-- comb -->
-                    <div class="d-flex align-items-center my-1">
-                      <span class="skill skill__comb"></span>
-                      <?php for ($i = 1; $i <= $m['memComb']; $i++) { ?>
-                        <i class="skill__star bi bi-star-fill mx-1"></i>
-                      <?php } ?>
+                    <div class="skill__wrapper">
+                      <!-- navg -->
+                      <div class="d-flex align-items-center my-1">
+                        <span class="skill skill__navg"></span>
+                        <?php for ($i = 1; $i <= $m['memNavg']; $i++) { ?>
+                          <i class="skill__star bi bi-star-fill mx-1"></i>
+                        <?php } ?>
+                      </div>
+                      <!-- comb -->
+                      <div class="d-flex align-items-center my-1">
+                        <span class="skill skill__comb"></span>
+                        <?php for ($i = 1; $i <= $m['memComb']; $i++) { ?>
+                          <i class="skill__star bi bi-star-fill mx-1"></i>
+                        <?php } ?>
+                      </div>
                     </div>
 
                   </div>
-                  <!-- COMMANDS -->
-                  <div class="col-3 card__commands d-flex justify-content-center align-items-center px-4">
+                </div> <!-- end of LIGNE 1 -->
+
+                <!-- A*A -- LIGNE 2 -->
+                <div class="row px-3">
+                  <!-- memName -->
+                  <h3 class="mb-0"><?= $m['memName'] ?></h3>
+                  <!-- memSign -->
+                  <p class="mb-0"><?= $m['memSign'] ?></p>
+                </div> <!-- end of LIGNE 2 -->
+
+                <!-- A*A -- LIGNE 3 -->
+                <div class="row px-2">
+                  <div class="col-12 text-end">
                     <!-- EDIT -->
-                    <a class="btn btn-cust p-2 m-1 command__btn edit__btn" href="index.php?action=edit&id=<?= $m['memId'] ?>">
-                      <i class="bi bi-pencil-square fs-3"></i>
+                    <a class="btn btn-cust m-1 command__btn edit__btn" href="index.php?action=edit&id=<?= $m['memId'] ?>">
+                      <i class="bi bi-pencil-square fs-4"></i>
                     </a>
                     <!-- DELETE -->
-                    <a class="btn btn-cust p-2 m-1 command__btn delete__btn" data-id="<?= $m['memId'] ?>" data-name="<?= $m['memName'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                      <i class="bi bi-trash3 fs-3"></i>
+                    <a class="btn btn-cust m-1 command__btn delete__btn" data-id="<?= $m['memId'] ?>" data-name="<?= $m['memName'] ?>" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                      <i class="bi bi-trash3 fs-4"></i>
                     </a>
                   </div>
-                </div>
-              </div>
+                </div> <!-- end of LIGNE 3 -->
 
-            </div>
+              </div>
+            </article>
 
           <?php } ?>
 
-        </div> <!-- end of crew__wrapper -->
+        </div>
 
       </div>
     </section>
@@ -365,15 +371,15 @@
 
       <div class="row align-items-center">
         <div class="col-12 col-lg-8">
-          <!-- Attribution -->
-          <p class="m-0">Les icônes et images d'avatars sont des ressources libres de droits du site Flaticon :</p>
-          <a class="link link-light footer__link" href="https://www.flaticon.com/free-icons/beard" title="beard icons">Beard icons created by Smashicons - Flaticon</a>
+          <p class="m-0 footer__text">Les icônes et images d'avatars sont des ressources libres de droits du site Flaticon.</p>
+          <a class="link link-light footer__text" href="https://www.flaticon.com/packs/facial-hair-4" title="beard icons" target="_blank">Facial Hair Pack created by Smashicons - Flaticon</a>
           <br>
-          <a class="link link-light footer__link" href="https://www.flaticon.com/free-icons/beard" title="beard icons">Ancient Greece Pack by Freepik - Flaticon</a>
+          <a class="link link-light footer__text" href="https://www.flaticon.com/packs/ancient-greece-4" title="beard icons" target="_blank">Ancient Greece Pack created by Freepik - Flaticon</a>
         </div>
 
-        <div class="col-12 col-lg-4 mt-4 mt-lg-0 mb-lg-0">
-          <p class="text-center text-lg-end">Matteo Porrani &copy; 2022</p>
+        <div class="col-12 text-center text-lg-end col-lg-4 mt-4 mt-lg-0 mb-lg-0">
+          <img class="footer__icon mb-2" src="public/icons/helmet.png" alt="casque grec">
+          <p>Matteo Porrani &copy; 2022</p>
         </div>
       </div>
 

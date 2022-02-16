@@ -8,13 +8,10 @@
 
 body {
   font-family: 'Nunito', sans-serif;
-  /* background: #fff0d3; */
   background: #fff;
-
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-
   overflow-x: hidden;
 }
 
@@ -26,17 +23,28 @@ h3 {
 }
 
 header {
-  /* background: #813900; */
   background: var(--c-yell);
 }
 
+.tiles {
+  height: 22px;
+  background-color: var(--c-yell);
+  background-image: url(../images/tile.svg);
+  background-repeat: repeat-x;
+  background-size: 22px 22px;
+  background-position: bottom;
+}
+
 footer {
-  /* background: #ffD37D; */
-  /* background: #813900; */
   background: var(--bs-dark);
   color: var(--bs-light);
   margin-top: auto;
 }
+
+.footer__icon {
+  width: 32px;
+}
+
 
 
 
@@ -80,10 +88,14 @@ i.bi-trash3 {
 
 /* icône du bâteau dans le header */
 .hero__icon {
-  width: 40px;
+  width: 80px;
 }
 
-.footer__link {
+.logo__link {
+  text-shadow: 1px 2px 0px #f8f9fa;
+}
+
+.footer__text {
   font-size: .75rem !important;
 }
 
@@ -109,11 +121,13 @@ i.bi-trash3 {
 
 
 
+
 /* FORM ++++++++++++++++++++++++++++++++++++ */
 
 .form__avat__img {
   width: 15vw;
   max-width: 180px;
+  filter: drop-shadow(3px 2px 3px var(--c-softgray));
 }
 
 .avat__arrow {
@@ -123,7 +137,6 @@ i.bi-trash3 {
 output {
   display: block;
 }
-
 
 /* bouton de validation du formulaire */
 .form__submit__btn {
@@ -139,6 +152,7 @@ output {
 
 
 
+
 /* CARDS ++++++++++++++++++++++++++++++++++++ */
 
 .crew__member {
@@ -146,16 +160,16 @@ output {
 }
 
 .crew__member__head {
-  /* border: 1px solid #ee5a24; */
   background-image: url('../icons/bg_circle.svg');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 30%;
+  background-size: cover;
   background-clip: border-box;
 }
 
-.avat_img {
+.avat__img {
   max-width: 60px;
+  filter: drop-shadow(3px 2px 3px var(--c-softgray));
 }
 
 /* section skills */
@@ -187,7 +201,6 @@ output {
   height: 40px;
 }
 
-
 .slide-right {
   transition: all 1s ease-in-out;
   transform: translateX(100%);
@@ -210,5 +223,29 @@ output {
   }
   100% {
     transform: scale(1);
+  }
+}
+
+
+
+/* T*T -- MEDIA QUERIES */
+
+@media (min-width: 992px) {
+
+  .section__toggler {
+    width: 8vw;
+  }
+
+  /* inversion ordre AVATAR & NOM+SIGNES dans le formulaire */
+  .form__top__avat {
+    order: 2
+  }
+
+  .form__top__info {
+    order: 1
+  }
+
+  .form__submit__btn {
+    width: 25%;
   }
 }

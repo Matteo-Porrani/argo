@@ -59,12 +59,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors = true;
         continue;
       }
-
     }
 
     if ($errors) {
       // MK -- si ERREURS ...
 
+      // on prépare '$incompleteMember' pour réafficher le form avec messages d'erreur
       $incompleteMember['memName'] = $_POST['f_name'];
       $incompleteMember['memSign'] = $_POST['f_sign'];
       $incompleteMember['memIcon'] = "public/icons/ava_{$_POST['f_icon']}.png";
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       // MK -- si aucune erreur...
 
-      // création de l'array pour écriture en bdd
+      // on crée '$memberData' pour écriture en bdd
       $memberData = [
         $_POST['f_name'],
         $_POST['f_sign'],
@@ -88,10 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_POST['f_comb']
       ];
 
-      // A*A -- si 'f_id' est présent il s'agit d'une modification
+      // A*A -- si 'f_id' est présent il s'agit d'une MODIFICATION
       if (!empty($_POST['f_id'])) {
 
-        // on ajoute l'id en 'queue' de array pour modifier l'élément
+        // on ajoute l'id en 'queue' d'array pour modifier l'élément
         $memberData[] = $_POST['f_id'];
 
         $res = updateMember($memberData);
@@ -101,20 +101,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // il s'agit d'une création
         $res = createMember($memberData);
         $feedback = "L'élément {$_POST['f_name']} a bien été ajouté.";
-
       }
     }
   }
 }
 
 
-
 // MK -- si requête en GET avec paramètres 'action' & 'id'...
 if (
   $_SERVER['REQUEST_METHOD'] === 'GET'
   && isset($_GET['action'])
+  && isset($_GET['id'])
 ) {
-  // on récupère les données d'un membre pour remplir le formulaire
+  // on récupère les données de l'élément pour remplir le formulaire
   $existingMember = getMemberById($_GET['id']);
 
   $showCrewSection = 'd-none';

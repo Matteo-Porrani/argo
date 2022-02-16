@@ -9,28 +9,21 @@ const addMemberBtn = document.querySelector('#addMember');
 
 
 
-
-
 // A*A -- gestion AVATAR dans formulaire
 
 const iconHiddenInput = document.querySelector('#p_icon');
-
 const avatarImage = document.querySelector('.form__avat__img');
 const avaButtons = document.querySelectorAll('.avat__arrow');
 
 
-
 // on capte une 'modification' d'élément
 if (location.search.match(/edit/)) {
-
   const urlElements = avatarImage.src.split('/');
   const fileName = urlElements[urlElements.length - 1];
   const avatarParsedId = parseInt(fileName.match(/\d+/),10);
 
   iconHiddenInput.value = avatarParsedId;
-
   showForm();
-
 }
 
 // GET NUMERIC VALUE IN STRING
@@ -39,8 +32,7 @@ if (location.search.match(/edit/)) {
 
 
 
-
-// A*A -- event listener sur bouton '#addMember'
+// A*A -- event listeners sur les 2 boutons en haut de la page
 showCrewBtn.addEventListener('click', showCrew);
 addMemberBtn.addEventListener('click', showForm);
 
@@ -63,7 +55,6 @@ function showForm() {
 
 
 
-
 // A*A -- gestion du bouton DELETE dans la card
 const deleteButtons = document.querySelectorAll('.delete__btn');
 
@@ -72,22 +63,17 @@ deleteButtons.forEach(btn => {
 
     e.preventDefault();
 
-    // console.log(e.target.dataset.id);
-
     const delItemNameSpan = document.querySelector('.delItemName');
     const delItemHiddenId = document.querySelector('#mod_form_mem_id');
 
     delItemNameSpan.innerHTML = e.currentTarget.dataset.name;
     delItemHiddenId.value = e.currentTarget.dataset.id;
-
   });
 });
 
 
 
-
-// MESSAGE DE CONFIRMATION
-
+// A*A -- MESSAGE DE CONFIRMATION
 const feedbackSection = document.querySelector('#feedback');
 
 if (feedbackSection.classList.contains('d-block')) {
@@ -95,7 +81,6 @@ if (feedbackSection.classList.contains('d-block')) {
   setTimeout(function() {
     feedbackSection.classList.add('pulse');
   }, 100);
-
 
   setTimeout(function() {
     feedbackSection.classList.add('slide-right');
@@ -107,5 +92,4 @@ if (feedbackSection.classList.contains('d-block')) {
     }, 950);
 
   }, 3000);
-
 }

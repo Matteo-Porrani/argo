@@ -16,6 +16,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Rancho&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Caesar+Dressing&display=swap" rel="stylesheet">
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="public/css/style.css">
@@ -67,11 +68,11 @@
     </div>
     <div class="tiles"></div>
   </header>
-  
-  
+
+
   <!-- MK -- MAIN -->
   <main>
-    
+
     <?php
     if (!empty($feedback)) {
       $displayFeedback = 'd-block';
@@ -91,13 +92,13 @@
     <section id="menu" class="my-3">
       <div class="container">
         <div class="row px-1">
-          <div class="col-6">
-            <a id="showCrew" class="btn section__toggler p-2 active" data-toggle="crew">
+          <div class="col-6 px-2 text-end">
+            <a id="showCrew" class="btn section__toggler p-2 active" data-toggle="crew" title="afficher l'équipage">
               <i class="bi bi-list-task fs-2 p-1"></i>
             </a>
           </div>
-          <div class="col-6">
-            <a id="addMember" class="btn section__toggler p-2" data-toggle="form">
+          <div class="col-6 px-2">
+            <a id="addMember" class="btn section__toggler p-2" data-toggle="form" title="ajouter un argonaute">
               <i class="bi bi-person-plus fs-2"></i>
             </a>
           </div>

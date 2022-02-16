@@ -18,7 +18,9 @@ body {
 h1,
 h2,
 h3 {
-  font-family: 'Rancho', cursive;
+  /* font-family: 'Rancho', cursive; */
+  font-family: 'Caesar Dressing', cursive;
+  font-weight: normal;
   color: var(--c-brown);
 }
 
@@ -26,6 +28,7 @@ header {
   background: var(--c-yell);
 }
 
+/* motifs en bas du header */
 .tiles {
   height: 22px;
   background-color: var(--c-yell);
@@ -41,6 +44,10 @@ footer {
   margin-top: auto;
 }
 
+.footer__text {
+  font-size: .75rem !important;
+}
+
 .footer__icon {
   width: 32px;
 }
@@ -48,16 +55,8 @@ footer {
 
 
 
+
 /* UTILITY CLASSES ++++++++++++++++++++++++++++++++++++ */
-
-.alert {
-  padding: .25rem !important;
-  font-size: .75rem;
-}
-
-.input__alert {
-  outline: 2px solid var(--bs-danger);
-}
 
 .bg-lightgray {
   background: var(--c-xlight);
@@ -76,14 +75,18 @@ footer {
   color: var(--c-yell) !important;
 }
 
-/* s'applique aux boutons 'ANNULER' et 'SUPPRIMER' dans la modale */
+/* s'applique aux boutons 'ANNULER' et 'SUPPRIMER' de la modale */
 .modal__btn {
   width: 36%;
 }
 
-/* s'applique à l'icône delete dans la card */
-i.bi-trash3 {
-  color: var(--bs-danger);
+.alert {
+  padding: .25rem !important;
+  font-size: .75rem;
+}
+
+.input__alert {
+  outline: 2px solid var(--bs-danger);
 }
 
 /* icône du bâteau dans le header */
@@ -95,9 +98,6 @@ i.bi-trash3 {
   text-shadow: 1px 2px 0px #f8f9fa;
 }
 
-.footer__text {
-  font-size: .75rem !important;
-}
 
 
 
@@ -199,8 +199,10 @@ output {
 .command__btn {
   width: 40px;
   height: 40px;
+  color: var(--c-softgray);
 }
 
+/* animation & disparition du message de feedback */
 .slide-right {
   transition: all 1s ease-in-out;
   transform: translateX(100%);
@@ -232,11 +234,12 @@ output {
 
 @media (min-width: 992px) {
 
+  /* largeur des boutons EQUIPAGE/FORMULAIRE */
   .section__toggler {
     width: 8vw;
   }
 
-  /* inversion ordre AVATAR & NOM+SIGNES dans le formulaire */
+  /* inversion ordre AVATAR & NOM + DESCRIPTION dans le formulaire */
   .form__top__avat {
     order: 2
   }
@@ -245,6 +248,7 @@ output {
     order: 1
   }
 
+  /* largeur du bouton submit du formulaire */
   .form__submit__btn {
     width: 25%;
   }
